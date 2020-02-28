@@ -1,0 +1,95 @@
+/*
+AIM:AIM:Write a program to implement any two CPU scheduling algorithms like FCFS, SJF,
+Round Robin etc.
+*/
+#include<stdio.h>
+
+void main()
+{
+ int a[10],b[10],x[10];
+ int waiting[10],turnaround[10],completion[10];
+ int i,j,smallest,count=0,time,n;
+ double avg=0,tt=0,end;
+ printf("\nEnter the number of Processes: ");
+ scanf("%d",&n);
+ for(i=0;i<n;i++)
+ {
+   printf("\nEnter arrival time of process %d : ",i+1);
+   scanf("%d",&a[i]);
+ }
+ for(i=0;i<n;i++)
+ {
+   printf("\nEnter burst time of process %d : ",i+1);
+   scanf("%d",&b[i]);
+ }
+ for(i=0;i<n;i++)
+ x[i]=b[i];
+
+  b[9]=9999;
+
+ for(time=0;count!=n;time++)
+ {
+   smallest=9;
+  for(i=0;i<n;i++)
+  {
+   if(a[i]<=time && b[i]<b[smallest] && b[i]>0 )
+   smallest=i;
+  }
+  b[smallest]--;
+  if(b[smallest]==0)
+  {
+   count++;
+   end=time+1;
+   completion[smallest] = end;
+   waiting[smallest] = end - a[smallest] - x[smallest];
+   turnaround[smallest] = end - a[smallest];
+ 
+  }
+ }
+ printf("pid \t burst \t arrival \twaiting \tturnaround \tcompletion");
+ for(i=0;i<n;i++)
+ {
+   printf("\n %d \t   %d \t %d\t\t%d   \t\t%d\t\t%d",i+1,x[i],a[i],waiting[i],turnaround[i],completion[i]);
+   avg = avg + waiting[i];
+   tt = tt + turnaround[i];
+ }
+ printf("\n\nAverage waiting time = %lf\n",avg/n);
+ printf("Average Turnaround time = %lf",tt/n);
+ 
+}	
+
+/*
+OUTPUT:
+
+Enter the number of Processes: 5
+
+Enter arrival time of process 1 : 0
+
+Enter arrival time of process 2 : 1
+
+Enter arrival time of process 3 : 2
+
+Enter arrival time of process 4 : 3
+
+Enter arrival time of process 5 : 4
+
+Enter burst time of process 1 : 8
+
+Enter burst time of process 2 : 1
+
+Enter burst time of process 3 : 3
+
+Enter burst time of process 4 : 2
+
+Enter burst time of process 5 : 6
+pid 	 burst 	 arrival 	waiting 	turnaround 	completion
+ 1 	   8 	 0		12   		20		20
+ 2 	   1 	 1		0   		1		2
+ 3 	   3 	 2		0   		3		5
+ 4 	   2 	 3		2   		4		7
+ 5 	   6 	 4		3   		9		13
+
+Average waiting time = 3.400000
+Average Turnaround time = 7.400000
+
+*/

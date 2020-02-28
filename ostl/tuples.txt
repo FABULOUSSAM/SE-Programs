@@ -1,0 +1,61 @@
+/*
+AIM:
+Write a menu driven program to demonstrate use of tuples in python.
+a. Add and show N student roll number, name and 3 subject marks in a list of
+tuples.
+b. Display student roll number and marks whose name is Python.
+c. Demonstrate nested tuple and sort nested tuple by name.
+*/
+
+name1,roll_no1,marks1=[],[],[]
+student,new,sorting=[],[],[]
+n=int(input("Enter the number of students : "))
+
+count=0
+for i in range(0,n):
+	name=input("Enter the name :")
+	roll_no=input("Enter the Roll no :")
+	for j in range (1,4):
+		marks1.append(input("Enter the marks of subject :"))
+	student=(name,roll_no,marks1)
+	new.append(student)
+	marks1=[]
+print(new)
+for i in range(0,n):
+	if(new[i][0]=="python"):
+		print("name :",new[i][0])
+		print("roll no :",new[i][1])
+		print("marks :",new[i][2])
+		count=1
+		break
+
+if(count==0):
+	print("python not found ")
+
+print("Before sorting:",new)
+sorting=new
+sorting.sort();
+print("After sorting sorting:",sorting)
+
+
+/*
+OUTPUT:
+sam@BountyHunter:~/Desktop/collage/ostl$ python3 exp4.py
+Enter the number of students : 2
+Enter the name :sam
+Enter the Roll no :12
+Enter the marks of subject :13
+Enter the marks of subject :14
+Enter the marks of subject :15
+Enter the name :python
+Enter the Roll no :14
+Enter the marks of subject :15
+Enter the marks of subject :16
+Enter the marks of subject :17
+[('sam', '12', ['13', '14', '15']), ('python', '14', ['15', '16', '17'])]
+name : python
+roll no : 14
+marks : ['15', '16', '17']
+Before sorting: [('sam', '12', ['13', '14', '15']), ('python', '14', ['15', '16', '17'])]
+After sorting sorting: [('python', '14', ['15', '16', '17']), ('sam', '12', ['13', '14', '15'])]
+*/
